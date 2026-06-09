@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 import rs.ac.singidunum.autosalon.model.Automobil;
@@ -33,6 +34,23 @@ public class AutomobilWebController {
 		model.addAttribute("saloni", salonService.findAll());
 		model.addAttribute("statusi", StatusAutomobila.values());
 		return "automobili";
+	}
+	
+	@GetMapping("/automobili/dostupni")
+	public String prikaziDostupneAutomobile(Model model) {
+		model.addAttribute("automobili", automobilService.findDostupniAutomobili());
+		return "automobili";
+	}
+	
+	@GetMapping("/automobili/pretraga")
+	public String prikaziPretraguPoMarki() {
+		return "automobili-pretraga";
+	}
+	
+	@GetMapping("/automobili/pretraga/rezultat")
+	public String pretraziPoMarki(@RequestParam String marka, Model model) {
+	    model.addAttribute("automobili", automobilService.findByMarka(marka));
+	    return "automobili";
 	}
 	
 	@GetMapping("/automobili/izmeni/{id}")

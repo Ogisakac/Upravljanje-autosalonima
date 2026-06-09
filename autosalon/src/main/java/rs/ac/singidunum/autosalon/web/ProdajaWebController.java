@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import rs.ac.singidunum.autosalon.model.NacinPlacanja;
 import rs.ac.singidunum.autosalon.model.Prodaja;
@@ -36,6 +37,24 @@ public class ProdajaWebController {
         model.addAttribute("prodaje", prodajaService.findAll());
         return "prodaje";
     }
+	
+	@GetMapping("/prodaje/ukupan-prihod")
+	public String prikaziUkupanPrihod(Model model) {
+	    model.addAttribute("ukupanPrihod", prodajaService.izracunajUkupanPrihod());
+	    return "ukupan-prihod";
+	}
+
+	@GetMapping("/prodaje/kupac")
+	public String prikaziProdajePoKupcu(@RequestParam Long kupacId, Model model) {
+	    model.addAttribute("prodaje", prodajaService.findByKupacId(kupacId));
+	    return "prodaje";
+	}
+
+	@GetMapping("/prodaje/zaposleni")
+	public String prikaziProdajePoZaposlenom(@RequestParam Long zaposleniId, Model model) {
+	    model.addAttribute("prodaje", prodajaService.findByZaposleniId(zaposleniId));
+	    return "prodaje";
+	}
 	
 	@GetMapping("/prodaje/nova")
     public String prikaziFormu(Model model) {

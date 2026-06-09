@@ -8,7 +8,26 @@
 
 <h1>Prodaje</h1>
 
-<a href="/">Nazad na početnu</a>
+<h2>Funkcionalnosti</h2>
+<a href="/prodaje/ukupan-prihod">Ukupan prihod</a>
+<form action="/prodaje/kupac" method="get">
+    <p>
+        ID kupca:
+        <input type="number" name="kupacId" required>
+        <button type="submit">Prikazi prodaje kupca</button>
+    </p>
+</form>
+<form action="/prodaje/zaposleni" method="get">
+    <p>
+        ID zaposlenog:
+        <input type="number" name="zaposleniId" required>
+        <button type="submit">Prikazi prodaje zaposlenog</button>
+    </p>
+</form>
+
+<br>
+
+<a href="/">Nazad na pocetnu</a>
 <br><br>
 <a href="/prodaje/nova">Dodaj prodaju</a>
 
