@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Oprema</title>
+</head>
+<body>
+
+<h1>Oprema</h1>
+
+<a href="/">Nazad na pocetnu</a>
+<br><br>
+<a href="/oprema/nova">Dodaj opremu</a>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Naziv</th>
+            <th>Opis</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="o : ${oprema}">
+            <td th:text="${o.id}"></td>
+            <td th:text="${o.naziv}"></td>
+            <td th:text="${o.opis}"></td>
+            <td>
+                <a th:href="@{/oprema/izmeni/{id}(id=${o.id})}">Izmeni</a>
+
+                <form th:action="@{/oprema/obrisi/{id}(id=${o.id})}" method="post" style="display:inline;">
+                    <button type="submit">Obrisi</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import rs.ac.singidunum.autosalon.exception.ResourceNotFoundException;
 import rs.ac.singidunum.autosalon.model.Salon;
 import rs.ac.singidunum.autosalon.repository.SalonRepository;
 
@@ -21,7 +22,7 @@ public class SalonService {
 	
 	public Salon findById(Long id) {
 		return salonRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Salon nije pronadjen"));
+				.orElseThrow(() -> new ResourceNotFoundException("Salon nije pronadjen"));
 	}
 	
 	public Salon save(Salon salon) {

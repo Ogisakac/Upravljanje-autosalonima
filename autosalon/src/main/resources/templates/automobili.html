@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Automobili</title>
+</head>
+<body>
+
+<h1>Automobili</h1>
+
+<a href="/">Nazad na pocetnu</a>
+<a href="/automobili/novi">Dodaj automobil</a>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Registracija</th>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Godiste</th>
+            <th>Kilometraza</th>
+            <th>Cena</th>
+            <th>Status</th>
+            <th>Salon</th>
+            <th>Oprema</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="automobil : ${automobili}">
+            <td th:text="${automobil.id}"></td>
+            <td th:text="${automobil.registracija}"></td>
+            <td th:text="${automobil.marka}"></td>
+            <td th:text="${automobil.model}"></td>
+            <td th:text="${automobil.godiste}"></td>
+            <td th:text="${automobil.kilometraza}"></td>
+            <td th:text="${automobil.cena}"></td>
+            <td th:text="${automobil.status}"></td>
+            <td th:text="${automobil.salon.naziv}"></td>
+            <td>
+    			<span th:if="${automobil.oprema == null || automobil.oprema.isEmpty()}">
+       			Nema opreme
+    			</span>
+    			<span th:each="o, iterStat : ${automobil.oprema}">
+        		<span th:text="${o.naziv}"></span>
+       			<span th:if="${!iterStat.last}">, </span>
+    			</span>
+			</td>
+            <td>
+    			<a th:href="@{/automobili/izmeni/{id}(id=${automobil.id})}">Izmeni</a>
+    			<form th:action="@{/automobili/obrisi/{id}(id=${automobil.id})}" method="post" style="display:inline;">
+        			<button type="submit">Obriši</button>
+    			</form>
+			</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

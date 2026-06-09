@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Saloni</title>
+</head>
+<body>
+
+<h1>Saloni</h1>
+
+<a href="/">Nazad na pocetnu</a>
+<br><br>
+<a href="/saloni/novi">Dodaj salon</a>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Naziv</th>
+            <th>Adresa</th>
+            <th>Grad</th>
+            <th>Telefon</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="salon : ${saloni}">
+            <td th:text="${salon.id}"></td>
+            <td th:text="${salon.naziv}"></td>
+            <td th:text="${salon.adresa}"></td>
+            <td th:text="${salon.grad}"></td>
+            <td th:text="${salon.telefon}"></td>
+            <td>
+                <a th:href="@{/saloni/izmeni/{id}(id=${salon.id})}">Izmeni</a>
+
+                <form th:action="@{/saloni/obrisi/{id}(id=${salon.id})}" method="post" style="display:inline;">
+                    <button type="submit">Obrisi</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Automobil forma</title>
+</head>
+<body>
+<h1>Dodavanje / Izmena automobila</h1>
+<form th:action="@{/automobili}" th:object="${automobil}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <p> 
+    	Registracija:
+       	<input type="text" th:field="*{registracija}" required>
+    </p>
+    <p>
+    	Marka:
+        <input type="text" th:field="*{marka}" required>
+    </p>
+
+    <p> 
+    	Model:
+        <input type="text" th:field="*{model}" required>
+    </p>
+
+    <p> 
+    	Godiste:
+        <input type="number" th:field="*{godiste}" required>
+    </p>
+
+    <p> 
+    	Kilometraza:
+        <input type="number" th:field="*{kilometraza}" required>
+    </p>
+
+    <p>
+    	Cena:
+        <input type="number" step="0.01" th:field="*{cena}" required>
+    </p>
+    <p>
+    	Oprema:
+    <select th:field="*{oprema}" multiple>
+        <option th:each="o : ${opremaLista}"
+                th:value="${o.id}"
+                th:text="${o.naziv}">
+        </option>
+    </select>
+	</p>
+	
+		<p>
+    Status:
+    <select th:field="*{status}">
+        <option th:each="status : ${statusi}"
+                th:value="${status}"
+                th:text="${status}">
+        </option>
+    </select>
+</p>
+
+<p>
+    Salon:
+    <select th:field="*{salon.id}">
+        <option th:each="salon : ${saloni}"
+                th:value="${salon.id}"
+                th:text="${salon.naziv}">
+        </option>
+    </select>
+</p>
+
+    <button type="submit">Sacuvaj</button>
+	
+
+
+</form>
+
+<br>
+
+<a href="/automobili">Nazad</a>
+
+</body>
+</html>

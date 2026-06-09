@@ -2,6 +2,8 @@ package rs.ac.singidunum.autosalon.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +26,7 @@ public class Oprema {
 	@Column(nullable = false, length = 300)
 	private String opis;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "oprema")
 	private List<Automobil> automobili;
 

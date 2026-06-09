@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import rs.ac.singidunum.autosalon.exception.BusinessException;
+import rs.ac.singidunum.autosalon.exception.ResourceNotFoundException;
 import rs.ac.singidunum.autosalon.model.Automobil;
 import rs.ac.singidunum.autosalon.model.Kupac;
 import rs.ac.singidunum.autosalon.model.Prodaja;
@@ -38,22 +40,20 @@ public class ProdajaService {
 	
 	public Prodaja findById(Long id) {
 		return prodajaRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Prodaja nije pronadjena"));
+				.orElseThrow(() -> new ResourceNotFoundException("Prodaja nije pronadjena"));
 	}
 	
 	public Prodaja save(Prodaja prodaja) {
 		Long automobilId = prodaja.getAutomobil().getId();
 		
 		if(prodajaRepository.existsByAutomobilId(automobilId)) {
-			throw new RuntimeException("Automobil je vec prodat");
+			throw new BusinessException("Automobil je vec prodat");
 		}
 		
 		pripremiRelacije(prodaja);
 		
 		Automobil automobil = prodaja.getAutomobil();
-		if(automobil.getStatus() == StatusAutomobila.PRODAT) {
-			throw new RuntimeException("Automobil je vec oznacen kao prodat");
-		}
+		
 		automobil.setStatus(StatusAutomobila.PRODAT);
 		
 		return prodajaRepository.save(prodaja);
@@ -86,16 +86,43 @@ public class ProdajaService {
 		Long zaposleniId = prodaja.getZaposleni().getId();
 		
 		Kupac kupac = kupacRepository.findById(kupacId)
-				.orElseThrow(() -> new RuntimeException("Kupac nije pronadjen")); 
+				.orElseThrow(() -> new ResourceNotFoundException("Kupac nije pronadjen")); 
 		
 		Automobil automobil = automobilRepository.findById(automobilId)
-				.orElseThrow(() -> new RuntimeException("Automobil nije pronadjen"));
+				.orElseThrow(() -> new ResourceNotFoundException("Automobil nije pronadjen"));
 		
 		Zaposleni zaposleni = zaposleniRepository.findById(zaposleniId)
-				.orElseThrow(() -> new RuntimeException("Zaposleni nije pronadjen"));
+				.orElseThrow(() -> new ResourceNotFoundException("Zaposleni nije pronadjen"));
 		
 		prodaja.setKupac(kupac);
 		prodaja.setAutomobil(automobil);
 		prodaja.setZaposleni(zaposleni);
+	}
+	
+	public List<Prodaja> findByKupacId(Long kupacId){
+		
+		kupacRepository.findById(kupacId)
+		.orElseThrow(() -> new ResourceNotFoundException("Kupac nije pronadjen"));
+		
+		return prodajaRepository.findByKupacId(kupacId);
+		
+		
+	}
+	
+	public Double izracunajUkupanPrihod() {
+		return prodajaRepository.findAll()
+				.stream()
+				.mapToDouble(Prodaja::getCenaProdaje)
+				.sum();
+	}
+	
+	public List<Prodaja> findByZaposleniId(Long zaposleniId){
+		
+		zaposleniRepository.findById(zaposleniId)
+				.orElseThrow(() -> new ResourceNotFoundException("Zaposleni nije pronadjen."));
+		
+			
+		
+		return prodajaRepository.findByZaposleniId(zaposleniId);
 	}
 }

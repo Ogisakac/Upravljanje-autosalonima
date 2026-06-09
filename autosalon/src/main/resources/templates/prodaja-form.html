@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Prodaja forma</title>
+</head>
+<body>
+
+<h1>Nova prodaja</h1>
+<form th:action="@{/prodaje}" th:object="${prodaja}" method="post">
+    <p>
+        Datum prodaje:
+        <input type="date" th:field="*{datumProdaje}" required>
+    </p>
+
+    <p>
+        Cena prodaje:
+        <input type="number" step="0.01" th:field="*{cenaProdaje}" required>
+    </p>
+
+    <p>
+        Nacin plaćanja:
+        <select th:field="*{nacinPlacanja}" required>
+            <option value="">-- Izaberite nacin plaćanja --</option>
+            <option th:each="nacin : ${naciniPlacanja}"
+                    th:value="${nacin}"
+                    th:text="${nacin}">
+            </option>
+        </select>
+    </p>
+
+    <p>
+        Automobil:
+        <select th:field="*{automobil.id}" required>
+            <option value="">-- Izaberite automobil --</option>
+            <option th:each="automobil : ${automobili}"
+                    th:value="${automobil.id}"
+                    th:text="${automobil.marka + ' ' + automobil.model + ' - ' + automobil.registracija}">
+            </option>
+        </select>
+    </p>
+
+    <p>
+        Kupac:
+        <select th:field="*{kupac.id}" required>
+            <option value="">-- Izaberite kupca --</option>
+            <option th:each="kupac : ${kupci}"
+                    th:value="${kupac.id}"
+                    th:text="${kupac.ime + ' ' + kupac.prezime}">
+            </option>
+        </select>
+    </p>
+
+    <p>
+        Zaposleni:
+        <select th:field="*{zaposleni.id}" required>
+            <option value="">-- Izaberite zaposlenog --</option>
+            <option th:each="zaposleni : ${zaposleni}"
+                    th:value="${zaposleni.id}"
+                    th:text="${zaposleni.ime + ' ' + zaposleni.prezime}">
+            </option>
+        </select>
+    </p>
+
+    <button type="submit">Sacuvaj prodaju</button>
+
+</form>
+
+<br>
+
+<a href="/prodaje">Nazad</a>
+
+</body>
+</html>

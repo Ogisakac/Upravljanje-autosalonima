@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import rs.ac.singidunum.autosalon.exception.ResourceNotFoundException;
 import rs.ac.singidunum.autosalon.model.Salon;
 import rs.ac.singidunum.autosalon.model.Zaposleni;
 import rs.ac.singidunum.autosalon.repository.SalonRepository;
@@ -26,14 +27,14 @@ public class ZaposleniService {
 	
 	public Zaposleni findById(Long id) {
 		return zaposleniRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Zaposleni nije pronadjen"));
+				.orElseThrow(() -> new ResourceNotFoundException("Zaposleni nije pronadjen"));
 	}
 	
 	public Zaposleni save(Zaposleni zaposleni) {
 		Long salonId = zaposleni.getSalon().getId();
 		
 		Salon salon = salonRepository.findById(salonId)
-				.orElseThrow(() -> new RuntimeException("Salon nije pronadjen"));
+				.orElseThrow(() -> new ResourceNotFoundException("Salon nije pronadjen"));
 		
 		zaposleni.setSalon(salon);
 		
@@ -44,7 +45,7 @@ public class ZaposleniService {
 		Zaposleni postojeciZaposleni = findById(id);
 		Long salonId = izmenjeniZaposleni.getSalon().getId();
 		Salon salon = salonRepository.findById(salonId)
-				.orElseThrow(() -> new RuntimeException("Salon nije pronadjen"));
+				.orElseThrow(() -> new ResourceNotFoundException("Salon nije pronadjen"));
 		
 		postojeciZaposleni.setIme(izmenjeniZaposleni.getIme());
 		postojeciZaposleni.setPrezime(izmenjeniZaposleni.getPrezime());

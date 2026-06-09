@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import rs.ac.singidunum.autosalon.exception.ResourceNotFoundException;
 import rs.ac.singidunum.autosalon.model.Oprema;
 import rs.ac.singidunum.autosalon.repository.OpremaRepository;
 
@@ -21,7 +22,7 @@ public class OpremaService {
 	
 	public Oprema findById(Long id) {
 		return opremaRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Oprema nije pronadjena"));
+				.orElseThrow(() -> new ResourceNotFoundException("Oprema nije pronadjena"));
 	}
 	
 	public Oprema save(Oprema oprema) {

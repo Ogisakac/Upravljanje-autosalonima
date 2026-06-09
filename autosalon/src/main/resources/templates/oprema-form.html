@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Oprema forma</title>
+</head>
+<body>
+
+<h1>Dodavanje / Izmena opreme</h1>
+<form th:action="@{/oprema}" th:object="${opremaObjekat}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <p>
+        Naziv:
+        <input type="text" th:field="*{naziv}" required>
+    </p>
+
+    <p>
+        Opis:
+        <input type="text" th:field="*{opis}">
+    </p>
+
+    <button type="submit">Sačuvaj</button>
+</form>
+<br>
+<a href="/oprema">Nazad</a>
+
+</body>
+</html>

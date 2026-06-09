@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Kupac forma</title>
+</head>
+<body>
+
+<h1>Dodavanje / Izmena kupca</h1>
+
+<form th:action="@{/kupci}" th:object="${kupac}" method="post">
+
+    <input type="hidden" th:field="*{id}">
+
+    <p>
+        Ime:
+        <input type="text" th:field="*{ime}" required>
+    </p>
+
+    <p>
+        Prezime:
+        <input type="text" th:field="*{prezime}" required>
+    </p>
+
+    <p>
+        Telefon:
+        <input type="text" th:field="*{telefon}" required>
+    </p>
+
+    <p>
+        Email:
+        <input type="email" th:field="*{email}" required>
+    </p>
+
+    <button type="submit">Sačuvaj</button>
+
+</form>
+
+<br>
+
+<a href="/kupci">Nazad</a>
+
+</body>
+</html>

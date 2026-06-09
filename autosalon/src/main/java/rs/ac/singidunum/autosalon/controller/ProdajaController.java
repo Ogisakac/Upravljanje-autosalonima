@@ -48,5 +48,18 @@ public class ProdajaController {
 		prodajaService.deleteById(id);
 	}
 	
+	@GetMapping("/kupac/{kupacId}")
+	public List<Prodaja> findByKupacId(@PathVariable Long kupacId){
+		return prodajaService.findByKupacId(kupacId);
+	}
 	
+	@GetMapping("/ukupan-prihod")
+	public Double izracunajUkupanPrihod() {
+		return prodajaService.izracunajUkupanPrihod();
+	}
+	
+	@GetMapping("/zaposleni/{zaposleniId}")
+	public List<Prodaja> findByZaposleniId(@PathVariable Long zaposleniId){
+		return prodajaService.findByZaposleniId(zaposleniId);
+	}
 }

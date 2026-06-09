@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import rs.ac.singidunum.autosalon.exception.ResourceNotFoundException;
 import rs.ac.singidunum.autosalon.model.Kupac;
 import rs.ac.singidunum.autosalon.repository.KupacRepository;
 
@@ -21,7 +22,7 @@ public class KupacService {
 	
 	public Kupac findById(Long id) {
 		return kupacRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Kupac nije pronadjen"));
+				.orElseThrow(() -> new ResourceNotFoundException("Kupac nije pronadjen"));
 	}
 	
 	public Kupac save(Kupac kupac) {

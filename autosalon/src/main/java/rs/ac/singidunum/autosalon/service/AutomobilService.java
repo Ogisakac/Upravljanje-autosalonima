@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import rs.ac.singidunum.autosalon.exception.ResourceNotFoundException;
 import rs.ac.singidunum.autosalon.model.Automobil;
 import rs.ac.singidunum.autosalon.model.Salon;
+import rs.ac.singidunum.autosalon.model.StatusAutomobila;
 import rs.ac.singidunum.autosalon.repository.AutomobilRepository;
 import rs.ac.singidunum.autosalon.repository.SalonRepository;
 
@@ -26,13 +28,13 @@ public class AutomobilService {
 	
 	public Automobil findById(Long id) {
 		return automobilRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Automobil nije pronadjen"));
+				.orElseThrow(() -> new ResourceNotFoundException("Automobil nije pronadjen"));
 	}
 	
 	public Automobil save(Automobil automobil) {
 		Long salonId = automobil.getSalon().getId();
 		Salon salon = salonRepository.findById(salonId)
-				.orElseThrow(() -> new RuntimeException("Salon nije pronadjen"));
+				.orElseThrow(() -> new ResourceNotFoundException("Salon nije pronadjen"));
 		automobil.setSalon(salon);
 		return automobilRepository.save(automobil);
 	}
@@ -41,7 +43,7 @@ public class AutomobilService {
 		Automobil postojeciAutomobil = findById(id);
 		Long salonId = izmenjeniAutomobil.getSalon().getId();
 		Salon salon = salonRepository.findById(salonId)
-				.orElseThrow(() -> new RuntimeException("Salon nije pronadjen"));
+				.orElseThrow(() -> new ResourceNotFoundException("Salon nije pronadjen"));
 		
 		postojeciAutomobil.setRegistracija(izmenjeniAutomobil.getRegistracija());
 		postojeciAutomobil.setMarka(izmenjeniAutomobil.getMarka());
@@ -60,4 +62,16 @@ public class AutomobilService {
 		automobilRepository.delete(automobil);
 	}
 	
+	public List<Automobil> findDostupniAutomobili(){
+		return automobilRepository.findByStatus(StatusAutomobila.DOSTUPAN);
+	}
+	
+	public List<Automobil> findByMarka(String marka){
+		
+		List<Automobil> automobili = automobilRepository.findByMarkaIgnoreCase(marka);
+		
+		return automobilRepository.findByMarkaIgnoreCase(marka);
+		
+
+	}
 }

@@ -48,5 +48,14 @@ public class AutomobilController {
 		automobilService.deleteById(id);
 	}
 	
+	@GetMapping("/dostupni")
+	public List<Automobil> findDostupniAutomobili(){
+		return automobilService.findDostupniAutomobili();
+	}
+	
+	@GetMapping("/marka/{marka}")
+	public List<Automobil> findByMarka(@PathVariable String marka){
+		return automobilService.findByMarka(marka);
+	}
 	
 }

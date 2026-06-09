@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Zaposleni forma</title>
+</head>
+<body>
+
+<h1>Dodavanje / Izmena zaposlenog</h1>
+<form th:action="@{/zaposleni}" th:object="${zaposleniObjekat}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <p>
+        Ime:
+        <input type="text" th:field="*{ime}" required>
+    </p>
+
+    <p>
+        Prezime:
+        <input type="text" th:field="*{prezime}" required>
+    </p>
+
+    <p>
+        Pozicija:
+        <input type="text" th:field="*{pozicija}" required>
+    </p>
+
+    <p>
+        Telefon:
+        <input type="text" th:field="*{telefon}">
+    </p>
+
+    <p>
+        Email:
+        <input type="email" th:field="*{email}">
+    </p>
+
+    <p>
+        Salon:
+        <select th:field="*{salon.id}" required>
+            <option value="">-- Izaberite salon --</option>
+            <option th:each="salon : ${saloni}"
+                    th:value="${salon.id}"
+                    th:text="${salon.naziv}">
+            </option>
+        </select>
+    </p>
+    <button type="submit">Sacuvaj</button>
+</form>
+<br>
+
+<a href="/zaposleni">Nazad</a>
+
+</body>
+</html>
