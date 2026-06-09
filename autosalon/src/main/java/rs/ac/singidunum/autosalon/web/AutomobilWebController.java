@@ -1,5 +1,7 @@
 package rs.ac.singidunum.autosalon.web;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -73,15 +75,19 @@ public class AutomobilWebController {
 	}
 	
 	@PostMapping("/automobili")
-	public String sacuvajAutomobil(@ModelAttribute Automobil automobil) {
-		
-		if(automobil.getId() != null) {
-			automobilService.update(automobil.getId(), automobil);
-		} else {
-			automobilService.save(automobil);
-		}
-		
-		return "redirect:/automobili";
+	public String sacuvajAutomobil(
+	        @ModelAttribute Automobil automobil,
+	        @RequestParam(required = false) List<Long> opremaIds) {
+
+	    automobilService.postaviOpremu(automobil, opremaIds);
+
+	    if (automobil.getId() != null) {
+	        automobilService.update(automobil.getId(), automobil);
+	    } else {
+	        automobilService.save(automobil);
+	    }
+
+	    return "redirect:/automobili";
 	}
 	
 	@PostMapping("/automobili/obrisi/{id}")

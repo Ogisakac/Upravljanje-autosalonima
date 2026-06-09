@@ -8,46 +8,42 @@
 <h1>Dodavanje / Izmena automobila</h1>
 <form th:action="@{/automobili}" th:object="${automobil}" method="post">
     <input type="hidden" th:field="*{id}">
-    <p> 
-    	Registracija:
+    <p>Registracija:
        	<input type="text" th:field="*{registracija}" required>
     </p>
-    <p>
-    	Marka:
-        <input type="text" th:field="*{marka}" required>
+    <p>Marka:
+    	<input type="text" th:field="*{marka}" required>
     </p>
 
-    <p> 
-    	Model:
+    <p>Model:
         <input type="text" th:field="*{model}" required>
     </p>
 
-    <p> 
-    	Godiste:
-        <input type="number" th:field="*{godiste}" required>
+    <p>Godiste:
+    	<input type="number" th:field="*{godiste}" required>
     </p>
 
-    <p> 
-    	Kilometraza:
+    <p>Kilometraza:
         <input type="number" th:field="*{kilometraza}" required>
     </p>
 
-    <p>
-    	Cena:
+    <p>Cena:
         <input type="number" step="0.01" th:field="*{cena}" required>
     </p>
-    <p>
-    	Oprema:
-    <select th:field="*{oprema}" multiple>
-        <option th:each="o : ${opremaLista}"
-                th:value="${o.id}"
-                th:text="${o.naziv}">
-        </option>
-    </select>
-	</p>
+    
+    <p>Oprema:</p>
+	<div th:each="o : ${opremaLista}">
+    	<label>
+        	<input type="checkbox"
+               name="opremaIds"
+               th:value="${o.id}"
+               th:checked="${automobil.oprema != null and automobil.oprema.contains(o)}">
+        	<span th:text="${o.naziv}"></span>
+    	</label>
+	</div>
 	
-		<p>
-    Status:
+	
+		<p>Status:
     <select th:field="*{status}">
         <option th:each="status : ${statusi}"
                 th:value="${status}"
