@@ -9,16 +9,12 @@
 <h1>Dodavanje / Izmena opreme</h1>
 <form th:action="@{/oprema}" th:object="${opremaObjekat}" method="post">
     <input type="hidden" th:field="*{id}">
-    <p>
-        Naziv:
+    <p>Naziv:
         <input type="text" th:field="*{naziv}" required>
     </p>
-
-    <p>
-        Opis:
+    <p>Opis:
         <input type="text" th:field="*{opis}">
     </p>
-
     <button type="submit">Sačuvaj</button>
 </form>
 <br>

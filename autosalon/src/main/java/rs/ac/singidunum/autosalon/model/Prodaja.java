@@ -2,7 +2,6 @@ package rs.ac.singidunum.autosalon.model;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,17 +33,14 @@ public class Prodaja {
 	@Column(nullable = false)
 	private NacinPlacanja nacinPlacanja;
 	
-//	@JsonBackReference(value = "kupac-prodaje")
 	@ManyToOne
 	@JoinColumn(name = "kupac_id", nullable = false)
 	private Kupac kupac;
 	
-//	@JsonBackReference(value = "zaposleni-prodaje")
 	@ManyToOne
 	@JoinColumn(name = "zaposleni_id", nullable = false)
 	private Zaposleni zaposleni;
 	
-//	@JsonBackReference(value = "automobil-prodaja")
 	@OneToOne
 	@JoinColumn(name = "automobil_id", nullable = false, unique = true)
 	private Automobil automobil;

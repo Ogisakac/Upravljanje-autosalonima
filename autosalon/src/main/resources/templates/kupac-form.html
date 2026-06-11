@@ -9,29 +9,19 @@
 <h1>Dodavanje / Izmena kupca</h1>
 
 <form th:action="@{/kupci}" th:object="${kupac}" method="post">
-
     <input type="hidden" th:field="*{id}">
-
-    <p>
-        Ime:
+    <p>Ime:
         <input type="text" th:field="*{ime}" required>
     </p>
-
-    <p>
-        Prezime:
+    <p>Prezime:
         <input type="text" th:field="*{prezime}" required>
     </p>
-
-    <p>
-        Telefon:
+    <p>Telefon:
         <input type="text" th:field="*{telefon}" required>
     </p>
-
-    <p>
-        Email:
+    <p>Email:
         <input type="email" th:field="*{email}" required>
     </p>
-
     <button type="submit">Sačuvaj</button>
 
 </form>

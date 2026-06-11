@@ -8,20 +8,15 @@
 
 <h1>Nova prodaja</h1>
 <form th:action="@{/prodaje}" th:object="${prodaja}" method="post">
-    <p>
-        Datum prodaje:
+    <p>Datum prodaje:
         <input type="date" th:field="*{datumProdaje}" required>
     </p>
-
-    <p>
-        Cena prodaje:
+    <p>Cena prodaje:
         <input type="number" step="0.01" th:field="*{cenaProdaje}" required>
     </p>
-
-    <p>
-        Nacin plaćanja:
+    <p>Nacin placanja:
         <select th:field="*{nacinPlacanja}" required>
-            <option value="">-- Izaberite nacin plaćanja --</option>
+            <option value="">-- Izaberite nacin placanja --</option>
             <option th:each="nacin : ${naciniPlacanja}"
                     th:value="${nacin}"
                     th:text="${nacin}">

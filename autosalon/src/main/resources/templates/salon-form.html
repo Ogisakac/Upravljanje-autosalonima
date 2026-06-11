@@ -10,23 +10,16 @@
 
 <form th:action="@{/saloni}" th:object="${salon}" method="post">
     <input type="hidden" th:field="*{id}">
-    <p>
-        Naziv:
+    <p>Naziv:
         <input type="text" th:field="*{naziv}" required>
     </p>
-
-    <p>
-        Adresa:
+    <p>Adresa:
         <input type="text" th:field="*{adresa}" required>
     </p>
-
-    <p>
-        Grad:
+    <p>Grad:
         <input type="text" th:field="*{grad}" required>
     </p>
-
-    <p>
-        Telefon:
+    <p>Telefon:
         <input type="text" th:field="*{telefon}" required>
     </p>
     <button type="submit">Sacuvaj</button>

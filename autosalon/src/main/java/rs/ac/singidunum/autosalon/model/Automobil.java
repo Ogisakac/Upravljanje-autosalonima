@@ -2,9 +2,7 @@ package rs.ac.singidunum.autosalon.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,13 +48,11 @@ public class Automobil {
 	@Column(nullable = false)
 	private StatusAutomobila status;
 	
-//	@JsonBackReference(value = "salon-automobili")
 	@ManyToOne
 	@JoinColumn(name = "salon_id", nullable = false)
 	private Salon salon;
 	
 	
-//	@JsonManagedReference(value = "automobil-prodaja")
 	@JsonIgnore
 	@OneToOne(mappedBy = "automobil")
 	private Prodaja prodaja;
@@ -66,7 +62,7 @@ public class Automobil {
 	name = "automobil_oprema",
 	joinColumns = @JoinColumn(name = "automobil_id"),
 	inverseJoinColumns = @JoinColumn(name = "oprema_id")
-			)
+	)
 	private List<Oprema> oprema;
 
 	public Automobil() {

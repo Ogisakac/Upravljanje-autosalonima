@@ -3,7 +3,6 @@ package rs.ac.singidunum.autosalon.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,12 +32,10 @@ public class Salon {
 	@Column(nullable = false, length = 20)
 	private String telefon;
 	
-//	@JsonManagedReference(value = "salon-automobili")
 	@JsonIgnore
 	@OneToMany(mappedBy = "salon")
 	private List<Automobil> automobili;
 	
-//	@JsonManagedReference(value = "salon-zaposleni")
 	@JsonIgnore
 	@OneToMany(mappedBy = "salon")
 	private List<Zaposleni> zaposleni;

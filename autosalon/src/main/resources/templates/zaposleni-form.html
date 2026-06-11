@@ -9,33 +9,24 @@
 <h1>Dodavanje / Izmena zaposlenog</h1>
 <form th:action="@{/zaposleni}" th:object="${zaposleniObjekat}" method="post">
     <input type="hidden" th:field="*{id}">
-    <p>
-        Ime:
+    <p>Ime:
         <input type="text" th:field="*{ime}" required>
     </p>
-
-    <p>
-        Prezime:
+    <p>Prezime:
         <input type="text" th:field="*{prezime}" required>
     </p>
-
-    <p>
-        Pozicija:
+    <p>Pozicija:
         <input type="text" th:field="*{pozicija}" required>
     </p>
-
-    <p>
-        Telefon:
+    <p>Telefon:
         <input type="text" th:field="*{telefon}">
     </p>
 
-    <p>
-        Email:
+    <p>Email:
         <input type="email" th:field="*{email}">
     </p>
 
-    <p>
-        Salon:
+    <p>Salon:
         <select th:field="*{salon.id}" required>
             <option value="">-- Izaberite salon --</option>
             <option th:each="salon : ${saloni}"
